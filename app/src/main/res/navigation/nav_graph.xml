@@ -11,7 +11,7 @@
         android:label="fragment_popular_movies"
         tools:layout="@layout/fragment_popular_movies" >
         <action
-            android:id="@+id/action_popularMoviesFragment_to_movieDetailsFragment"
+            android:id="@+id/popularToDetails"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
     <fragment
@@ -23,7 +23,10 @@
             android:id="@+id/action_movieDetailsFragment_to_popularMoviesFragment"
             app:destination="@id/popularMoviesFragment" />
         <argument
-            android:name="movieId"
+            android:name="movie_id"
             app:argType="integer" />
+        <argument
+            android:name="poster_path"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -15,7 +15,11 @@ import com.example.movieappdemo.utils.Constants
 import com.squareup.picasso.Picasso
 import kotlin.coroutines.coroutineContext
 
-class MovieAdapter(private val moviesList: List<Result>, private val context: Context) :
+class MovieAdapter(
+    private val moviesList: List<Result>,
+    private val context: Context,
+    private val listener: OnItemClickListener
+) :
     RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     inner class MovieViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
@@ -34,6 +38,12 @@ class MovieAdapter(private val moviesList: List<Result>, private val context: Co
             val animation = AnimationUtils.loadAnimation(v.context, android.R.anim.slide_in_left)
             v.startAnimation(animation)
         }
+
+        fun click(result: Result) {
+            itemView.setOnClickListener {
+                listener.onItemClick(result)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -44,6 +54,8 @@ class MovieAdapter(private val moviesList: List<Result>, private val context: Co
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(moviesList[position])
+
+        holder.click(moviesList[position])
     }
 
     override fun getItemCount() = moviesList.size
